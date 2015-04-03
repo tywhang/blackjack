@@ -42,7 +42,7 @@ gem 'spring',        group: :development
 gem 'backbone-on-rails'
 
 # Handlebars Templates
-group :assets do
-  gem 'handlebars_assets'
-end
+gem 'handlebars_assets'
 
+# Bootstrap
+gem 'bootstrap-sass'

@@ -1,2 +1,4 @@
 new Blackjack.Routers.GameRouter();
-Backbone.history.start();
+$(document).ready(function() {
+  Backbone.history.start();
+});

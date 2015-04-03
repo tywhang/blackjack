@@ -5,5 +5,6 @@ Blackjack.Routers.GameRouter = Backbone.Router.extend({
 
   start: function() {
     var gameView = new Blackjack.Views.Game();
+    gameView.render();
   }
 });
