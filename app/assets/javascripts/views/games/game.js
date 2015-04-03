@@ -1,5 +1,6 @@
 Blackjack.Views.Game = Backbone.View.extend({
   template: HandlebarsTemplates['games/index'],
+  el: '.game-board',
 
   initialize: function() {
     this.dealer = new Blackjack.Models.Dealer();
@@ -10,7 +11,6 @@ Blackjack.Views.Game = Backbone.View.extend({
   },
 
   render: function() {
-    debugger;
     this.$el.html(this.template());
   },
 
