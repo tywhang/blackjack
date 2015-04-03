@@ -20,7 +20,9 @@ Blackjack.Views.Game = Backbone.View.extend({
   checkAce: function() {
     var dealerShowCard = this.dealer.get('hand').where({ face: 'up' })[0].get('number');
     if (dealerShowCard === 'A') {
-      this.player.askInsurance();
+      if (this.player.askInsurance()) {
+
+      }
     }
   }
 });
