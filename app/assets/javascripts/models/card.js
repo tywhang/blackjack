@@ -2,6 +2,7 @@ Blackjack.Models.Card = Backbone.Model.extend({
 
   initialize: function() {
     this.setValue();
+    this.set('face', 'up');
   },
 
   setValue: function() {
