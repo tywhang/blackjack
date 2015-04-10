@@ -12,6 +12,18 @@ Blackjack.Views.Game = Backbone.View.extend({
 
   render: function() {
     this.$el.html(this.template());
+    this.dealerHandView = new Blackjack.Views.Hand({
+      owner: this.dealer,
+      el: '.dealer-hand',
+      collection: this.dealer.get('hand')
+    });
+    this.dealerHandView.render();
+    this.playerHandView = new Blackjack.Views.Hand({
+      owner: this.player,
+      el: '.player-hand',
+      collection: this.player.get('hand')
+    });
+    this.playerHandView.render();
   },
 
   startRound: function() {
@@ -20,7 +32,7 @@ Blackjack.Views.Game = Backbone.View.extend({
     this.player.get('hand').add(this.deck.shift());
     this.dealer.get('hand').add(this.deck.shift());
 
-    this.checkAce();
+    // this.checkAce();
   },
 
   checkAce: function() {
