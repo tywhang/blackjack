@@ -1,1 +1,5 @@
-<p>{{ number }} {{ suit }}</p>
+{{#if faceUp}}
+  <p>{{ number }} {{ suit }}</p>
+{{else}}
+  <p>Covered</p>
+{{/if}}
