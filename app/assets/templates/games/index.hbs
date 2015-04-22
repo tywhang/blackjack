@@ -13,4 +13,16 @@
   <div class="player-hand">
 
   </div>
+  <div class="js-player-actions">
+    {{#if preGame}}
+      <button class="js-deal">Deal</button>
+    {{else}}
+      {{#if playerTurn}}
+        <button class="js-double">Double</button>
+        <button class="js-split">Split</button>
+        <button class="js-hit">Hit</button>
+        <button class="js-stand">Stand</button>
+      {{/if}}
+    {{/if}}
+  </div>
 </div>

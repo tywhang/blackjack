@@ -41,6 +41,9 @@ gem 'spring',        group: :development
 # Backbone
 gem 'backbone-on-rails'
 
+# Marionette
+gem 'marionette-rails'
+
 # Handlebars Templates
 gem 'handlebars_assets'
 

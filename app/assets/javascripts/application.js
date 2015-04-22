@@ -15,6 +15,7 @@
 //= require turbolinks
 //= require underscore
 //= require backbone
+//= require backbone.marionette
 //= require handlebars
 //= require blackjack
 //= require_tree ../templates

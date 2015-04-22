@@ -1,27 +1,54 @@
-Blackjack.Views.Game = Backbone.View.extend({
+Blackjack.Views.Game = Backbone.Marionette.ItemView.extend({
   template: HandlebarsTemplates['games/index'],
   el: '.game-board',
+
+  ui: {
+    dealerHand: '.dealer-hand',
+    playerHand: '.player-hand',
+    deal: '.js-deal',
+    double: '.js-double',
+    split: '.js-split',
+    hit: '.js-hit',
+    stand: '.js-stand'
+  },
+
+  events: {
+    'click @ui.deal': 'startRound',
+    'click @ui.double': 'double',
+    'click @ui.split': 'split',
+    'click @ui.hit': 'hit',
+    'click @ui.stand': 'stand'
+  },
 
   initialize: function() {
     this.dealer = new Blackjack.Models.Dealer();
     this.player = new Blackjack.Models.Player();
     this.deck = new Blackjack.Collections.Deck();
     this.deck.reset(this.deck.shuffle());
-    this.startRound();
+    this.mode = 'preGame';
   },
 
-  render: function() {
-    this.$el.html(this.template());
+  templateHelpers: function() {
+    return {
+      preGame: this.mode == 'preGame',
+      playerTurn: this.mode == 'playerTurn'
+    };
+  },
+
+  onRender: function() {
+    this.dealerHand = this.dealer.get('hand');
     this.dealerHandView = new Blackjack.Views.Hand({
       owner: this.dealer,
-      el: '.dealer-hand',
-      collection: this.dealer.get('hand')
+      el: this.ui.dealerHand,
+      collection: this.dealerHand
     });
     this.dealerHandView.render();
+    this.listenTo(this.dealerHand, 'add', this.render);
+    this.playerHand = this.player.get('hand');
     this.playerHandView = new Blackjack.Views.Hand({
       owner: this.player,
-      el: '.player-hand',
-      collection: this.player.get('hand')
+      el: this.ui.playerHand,
+      collection: this.playerHand
     });
     this.playerHandView.render();
   },
@@ -33,6 +60,8 @@ Blackjack.Views.Game = Backbone.View.extend({
     this.dealer.get('hand').add(this.deck.shift());
 
     // this.checkAce();
+    this.listenTo(this.playerHand, 'add', this.render);
+    this.playerTurn();
   },
 
   checkAce: function() {
@@ -42,5 +71,23 @@ Blackjack.Views.Game = Backbone.View.extend({
 
       }
     }
+  },
+
+  playerTurn: function() {
+    this.mode = 'playerTurn';
+    this.render();
+  },
+
+  double: function() {
+
+  },
+  split: function() {
+
+  },
+  hit: function() {
+    this.player.get('hand').add(this.deck.shift());
+  },
+  stand: function() {
+
   }
 });
